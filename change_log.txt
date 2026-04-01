@@ -1,3 +1,2 @@
 04/01/2026 Went through and changed print(self.hand) line 89 in players.players
-and commented out print(self.score) idea is to not show the computer's hand
-also imported time to give a couple seconds to simulate the computer thinking
+and commented out print(self.score), idea is to not show the computer's hand.
