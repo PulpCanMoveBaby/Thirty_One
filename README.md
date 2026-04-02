@@ -23,7 +23,7 @@ These rule-based AI computer players are ready to knock and leave you high and d
       - Aces are worth 11
   - If a player gets two cards worth 10 and an ace of the same suit, it is an immediate win and the hand is over
   - Otherwise, when a player is satisfied with their hand, they can "knock" (knock on the surface of the object the game is being played on)
-      -This gives each player one more turn to make the highest number of suited cards
+      - This gives each player one more turn to make the highest number of suited cards
   - Lastly, if a player gets three of the same card (ex. three jacks or three sevens), the score of the hand is 30.5, but the player still must knock
 
 ## Getting Started
