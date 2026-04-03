@@ -19,7 +19,8 @@ class Game:
     def get_players(self):    
         while True:
             try:
-                num_players = int(input('How many human players? '))
+                print("\n\nTotal players (Human + Computer) must be four total.")
+                num_players = int(input('\nHow many human players? '))
                 num_cpu = int(input('How many computer players? '))
                 if num_players + num_cpu <= 4:
                     break
@@ -53,7 +54,7 @@ class Game:
         if player.__class__ == Human:
             print(player.score)
         else:
-            time.sleep(2)
+            time.sleep(0)
 
     def play(self):
         self.knock = False
@@ -102,7 +103,7 @@ class Game:
                 if winners_str:
                     winners_str = winners_str + ',' + self.winners[i]
                 else:
-                    winners_str = i
+                    winners_str = self.winners[i]
             print(f'\nThe winners are {winners_str}!!!!!!')
         else:
             print(f'\nThe winner is {self.winners[0]}!!!!')
@@ -114,7 +115,7 @@ class Game:
                     print(f'{key:<15}----> {i}')
 
     def game_over(self):
-        print(f'\n\nThe winner is {self.winner_immediate.name} with a score of 31 !!!')  
+        print(f'\n\nThe winner is {self.winner_immediate.name} with a score of 31 !!!\n\n')  
         self.winners = [self.winner_immediate.name]
      
         if not self.simulation:
@@ -171,6 +172,8 @@ class Simulation(Game):
         for i in self.winners:
             self.winner_list[i] +=1
         print(self.winner_list)
+        if self.simulation:
+            time.sleep(10)
 
 if __name__ == '__main__':
     choice = input("Game (1) or simulation (2)? ")

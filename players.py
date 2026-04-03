@@ -49,9 +49,11 @@ class Human:
     def discard(self, game):
 
         print(f'\nYour Hand------------')
-        print(*self.hand[:3], sep = '\n')
+        for idx, i in enumerate(self.hand[:3]):
+            print(i, '\t\t', f'({idx+1})')
+        # print(*self.hand[:3], sep = '\n')
         print(f"\nThe card drawn---------------")
-        print(self.hand[3])
+        print(self.hand[3], '\t\t', '(4)')
         while True:
             try:
                 choice = input('Pick a card to discard...(1-4)')
@@ -86,7 +88,12 @@ class Computer(Human):
     def discard(self, game):
         #evaluate hand and return immediate win if cpu score is 31
         self.evaluate_hand(game)
-        # print(self.hand)
+        if game.simulation:
+            print('Before Discard')
+            print(self.hand)
+            print('\n')
+            print(self.score)
+            print('\n')
         
         #get the highest suit score and lowest suit score from evaluation
         highest = max(self.score.values())
@@ -142,8 +149,10 @@ class Computer(Human):
         
         if len(two_of_same_card)>1:
             try_for_number = random.choice(two_of_same_card)
+        
         elif two_of_same_card:
             try_for_number = two_of_same_card[0]
+        
         else:
             try_for_number = False
 
@@ -153,11 +162,11 @@ class Computer(Human):
             self.go_for_three = False
 
         #set flag for if you have three of the same number (ex. three kings)
-        triple_and_knock = [i for i in same_value.keys() if same_value[i] == 2]
+        triple_and_knock = [i for i in same_value.keys() if same_value[i] > 1]
 
         #discard the one that is not a repeated card value
         if triple_and_knock:
-            card = [i for i in self.hand if same_value[i[-1]] != 2]
+            card = [i for i in self.hand if i[:-1] != triple_and_knock[0]]
             
             #the edge case where you have all four cards of a card value (ex. all four Aces)
             if not card:
@@ -206,9 +215,13 @@ class Computer(Human):
         
         #remove card and reset to re-evaluate
         self.hand.remove(card[0])
+        print(f'{self.name} has chosen to discard {card[0]}\n')
         game.deck.discard_pile.append(card[0])
+        if game.simulation:
+            print('After discard')
+            print(self.hand)
+            print('\n')
         self.reset_score()
-        #print(self.hand)
 
     def knock(self, Game):
         if Game.knock == True:
@@ -217,7 +230,11 @@ class Computer(Human):
             Game.knock = True
 
             if not Game.immediate_win:
+                print('\n\n\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
                 print(f"Computer {self.name} has knocked")
+                print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n')
+                time.sleep(2)
+
             return Game.knock, self
         else:
             return Game.knock, None
