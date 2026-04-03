@@ -53,8 +53,10 @@ class Game:
         self.immediate_win, self.winner_immediate = player.evaluate_hand(self.knock)
         if player.__class__ == Human:
             print(player.score)
+        elif self.simulation:
+            time.sleep(8)
         else:
-            time.sleep(0)
+            time.sleep(2)
 
     def play(self):
         self.knock = False
@@ -83,7 +85,7 @@ class Game:
             self.find_winner()
 
         if not self.simulation:
-            again = input('Play again? (y) for yes, enter for no. ')
+            again = input('\nPlay again? (y) for yes, enter for no. ')
             if again == 'y':
                 self.reset_game()
                 self.play()
@@ -176,7 +178,7 @@ class Simulation(Game):
             time.sleep(10)
 
 if __name__ == '__main__':
-    choice = input("Game (1) or simulation (2)? ")
+    choice = input("\nGame (1) or simulation (2)? ")
 
     if choice == '1':
         game = Game()

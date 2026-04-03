@@ -53,10 +53,10 @@ class Human:
             print(i, '\t\t', f'({idx+1})')
         # print(*self.hand[:3], sep = '\n')
         print(f"\nThe card drawn---------------")
-        print(self.hand[3], '\t\t', '(4)')
+        print(self.hand[3], '\t\t', '(4)\n')
         while True:
             try:
-                choice = input('Pick a card to discard...(1-4)')
+                choice = input('Pick a card to discard...(1-4): ')
                 choice = int(choice)
                 if choice >= 1 and choice <= 4:
                     break
@@ -215,7 +215,8 @@ class Computer(Human):
         
         #remove card and reset to re-evaluate
         self.hand.remove(card[0])
-        print(f'{self.name} has chosen to discard {card[0]}\n')
+        if game.simulation:
+            print(f'{self.name} has chosen to discard {card[0]}\n')
         game.deck.discard_pile.append(card[0])
         if game.simulation:
             print('After discard')
