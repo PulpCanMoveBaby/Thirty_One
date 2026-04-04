@@ -56,7 +56,7 @@ class Game:
         elif self.simulation:
             time.sleep(8)
         else:
-            time.sleep(2)
+            time.sleep(1)
 
     def play(self):
         self.knock = False
